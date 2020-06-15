@@ -14,11 +14,12 @@ public class Players : MonoBehaviour
     bool isHurt, isDead;        //untuk triger
 
     public float jumpValue;     //kekuatan lompat
-    public KeyCode left;
+    //buton
+    public KeyCode left;        
     public KeyCode right;
     public KeyCode jump;
     public KeyCode trowShoes;
-
+    //objek dilempar dan titik lempar
     public GameObject sepatu;
     public Transform atackPoint;
 
@@ -92,6 +93,7 @@ public class Players : MonoBehaviour
         if (((facingRight) && (localScale.x < 0)) || (!facingRight) && (localScale.x > 0))
         {
             localScale.x *= -1;
+           
         }
 
         transform.localScale = localScale;
