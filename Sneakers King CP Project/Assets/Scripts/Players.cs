@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Author : kelompok CP Project
+//Author : Kelompok CP Project
 
 public class Players : MonoBehaviour
 {
@@ -10,9 +10,17 @@ public class Players : MonoBehaviour
     Animator anim;
     bool facingRight = true;    //menghadap kanan
     float velX, speed = 3f;    //kecepatan jalan
-    public float jumpValue;     //pengaturan kekuatan lompat
-   // int health = 5;             //pengaturan jumlah darah
-   // bool isHurt, idDead;        //untuk triger
+    int health = 5;             //pengaturan jumlah darah
+    bool isHurt, isDead;        //untuk triger
+
+    public float jumpValue;     //kekuatan lompat
+    public KeyCode left;
+    public KeyCode right;
+    public KeyCode jump;
+    public KeyCode trowShoes;
+
+    public GameObject sepatu;
+    public Transform atackPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -26,23 +34,41 @@ public class Players : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift))       //lari dengan shift
             speed = 7f;
-        else 
-            speed = 3f;         //jalan saja
-
+        else
+        if (Input.GetKey(left))
+        {
+            speed = 3f;
+        }else if (Input.GetKey(right))
+        {
+            speed = 3f;
+        }//jalan
+                     
         //fungsi jump
-        if (Input.GetButtonDown("Jump") && rb.velocity.y == 0)      
+        if (Input.GetKeyDown(jump) && rb.velocity.y == 0)      
             rb.AddForce(Vector2.up * jumpValue);
+
+        //melempar sepatu
+        if (Input.GetKeyDown(trowShoes))
+        {
+            //melempar clone sepatu dan arah lempar
+            GameObject cloneSepatu = (GameObject)Instantiate(sepatu, atackPoint.position, atackPoint.rotation);
+            cloneSepatu.transform.localScale = transform.localScale ;
+
+            //animasi melempar (attack)
+            anim.SetTrigger("isAttack");
+            
+        }
 
         AnimationState();       //pengatur animasi gerakan
 
-       // if (!isDead)    //jika tidak mati maka bisa gerak
+        if (!isDead)    //jika tidak mati maka bisa gerak
 
         velX = Input.GetAxisRaw("Horizontal") * speed;  
     }
 
     void FixedUpdate()
     {
-       // if (!isHurt)    //jika tidak sakit
+        if (!isHurt)    //jika tidak sakit
 
         rb.velocity = new Vector2(velX, rb.velocity.y);     //pindah posisi (bergerak)
     }
@@ -101,5 +127,37 @@ public class Players : MonoBehaviour
         }
     }
 
-    //void OnTriggerEnter2D (col)
+    void OnTriggerEnter2D (Collider2D col)
+    {
+        if (col.gameObject.name.Equals("baja"))
+        {
+            health -= 1;
+        }
+
+        if (col.gameObject.name.Equals("baja") && health > 0)
+        {
+            anim.SetTrigger("isHurt");
+            StartCoroutine("Hurt");
+        }else
+        {
+            velX = 0;
+            isDead = true;
+            anim.SetTrigger("isDead");
+        }
+    }
+
+    IEnumerator Hurt()
+    {
+        isHurt = true;
+        rb.velocity = Vector2.zero;
+
+        if (facingRight)
+            rb.AddForce(new Vector2(-100f, 100f));
+        else
+            rb.AddForce(new Vector2(100f, 100f));
+
+        yield return new WaitForSeconds(0.3f);
+
+        isHurt = false;
+    }
 }
