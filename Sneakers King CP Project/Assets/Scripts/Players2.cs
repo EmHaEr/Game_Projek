@@ -4,7 +4,7 @@ using UnityEngine;
 
 //Author : Kelompok CP Project
 
-public class Players : MonoBehaviour
+public class Players2 : MonoBehaviour
 {
     Rigidbody2D rb;
     Animator anim;
@@ -34,11 +34,12 @@ public class Players : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(LeftShift))       //lari dengan shift
-            speed = 7f;
-        else
-            speed = 3f;
-        
+        if (!isDead)    //jika tidak mati maka bisa gerak
+            if (Input.GetKey(LeftShift))       //lari dengan shift
+                speed = 7f;
+            else
+                speed = 3f;
+
         //fungsi jump
         if (Input.GetKeyDown(jump) && rb.velocity.y == 0)      
             rb.AddForce(Vector2.up * jumpValue);
@@ -57,16 +58,28 @@ public class Players : MonoBehaviour
 
         AnimationState();       //pengatur animasi gerakan
 
-        if (!isDead)    //jika tidak mati maka bisa gerak
+       // if (!isDead)    //jika tidak mati maka bisa gerak
 
-        velX = Input.GetAxisRaw("Horizontal") * speed;  
+        //velX = speed;  
     }
 
     void FixedUpdate()
     {
         if (!isHurt)    //jika tidak sakit
 
-        rb.velocity = new Vector2(velX, rb.velocity.y);     //pindah posisi (bergerak)
+        if (Input.GetKey(leftbutton))
+        {
+            rb.velocity = new Vector2(-speed, rb.velocity.y);
+        }
+        else if (Input.GetKey(rightbutton))
+        {
+            rb.velocity = new Vector2(speed, rb.velocity.y);
+        }//jalan
+        else
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+        // rb.velocity = new Vector2(velX, rb.velocity.y);     //pindah posisi (bergerak)
     }
 
     void LateUpdate()
@@ -78,10 +91,10 @@ public class Players : MonoBehaviour
     void CheckWhereToFace()
     {
         Vector3 localScale = transform.localScale;
-        if (velX > 0)
+        if (rb.velocity.x > 0)
         {
             facingRight = true;
-        }else if (velX < 0)
+        }else if (rb.velocity.x < 0)
         {
             facingRight = false;
         }
@@ -97,7 +110,7 @@ public class Players : MonoBehaviour
     //pengecek animasi gerakan
     void AnimationState()
     {
-        if (velX == 0)
+        if (rb.velocity.x == 0)
         {
             anim.SetBool("isWalking", false);
             anim.SetBool("isRunning", false);
@@ -107,9 +120,9 @@ public class Players : MonoBehaviour
             anim.SetBool("isJumping", false);
             anim.SetBool("isFalling", false);
         }
-        if (Mathf.Abs(velX) == 3 && rb.velocity.y == 0)
+        if (Mathf.Abs(rb.velocity.x) == 3 && rb.velocity.y == 0)
             anim.SetBool("isWalking", true);
-        if (Mathf.Abs(velX) == 7 && rb.velocity.y == 0)
+        if (Mathf.Abs(rb.velocity.x) == 7 && rb.velocity.y == 0)
             anim.SetBool("isRunning", true);
         else 
             anim.SetBool("isRunning", false);
@@ -137,7 +150,7 @@ public class Players : MonoBehaviour
             StartCoroutine("Hurt");
         }else
         {
-            velX = 0;
+            speed = 0;
             isDead = true;
             anim.SetTrigger("isDead");
         }
