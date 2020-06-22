@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 46666105}
   - component: {fileID: 46666109}
   - component: {fileID: 46666111}
+  - component: {fileID: 46666112}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -262,7 +263,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 46666104}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d27db7f4e2420584ab4c15ac3cd5339b, type: 3}
   m_Name: 
@@ -301,7 +302,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 46666104}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e5c1b624f1b1dc44b850d3646039260, type: 3}
   m_Name: 
@@ -314,6 +315,24 @@ MonoBehaviour:
   trowShoes: 32
   sepatu: {fileID: 8877994487818067595, guid: 6dd0032bc5bfe234b88142ab781bc3f3, type: 3}
   atackPoint: {fileID: 313408640}
+--- !u!114 &46666112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46666104}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f982466e5167249b1feee0f21bd712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpValue: 300
+  leftbutton: 97
+  rightbutton: 100
+  jump: 32
+  LeftShift: 304
+  trowShoes: 119
 --- !u!1 &142764283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1535,13 +1554,14 @@ GameObject:
   - component: {fileID: 848732438}
   - component: {fileID: 848732437}
   - component: {fileID: 848732443}
+  - component: {fileID: 848732444}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &848732437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1713,6 +1733,24 @@ MonoBehaviour:
   trowShoes: 305
   sepatu: {fileID: 8877994487818067595, guid: 6dd0032bc5bfe234b88142ab781bc3f3, type: 3}
   atackPoint: {fileID: 1616522536}
+--- !u!114 &848732444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848732436}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f982466e5167249b1feee0f21bd712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpValue: 400
+  leftbutton: 276
+  rightbutton: 275
+  jump: 109
+  LeftShift: 303
+  trowShoes: 273
 --- !u!1001 &885857587
 PrefabInstance:
   m_ObjectHideFlags: 0

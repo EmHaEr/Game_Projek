@@ -14,12 +14,14 @@ public class Players2 : MonoBehaviour
     bool isHurt, isDead;        //untuk triger
 
     public float jumpValue;     //kekuatan lompat
-    //buton
+
+    //input gerakan
     public KeyCode leftbutton;        
     public KeyCode rightbutton;
     public KeyCode jump;
     public KeyCode LeftShift;
     public KeyCode trowShoes;
+
     //objek dilempar dan titik lempar
     public GameObject sepatu;
     public Transform atackPoint;
@@ -44,6 +46,7 @@ public class Players2 : MonoBehaviour
         if (Input.GetKeyDown(jump) && rb.velocity.y == 0)      
             rb.AddForce(Vector2.up * jumpValue);
 
+        if (!isDead)
         //melempar sepatu
         if (Input.GetKeyDown(trowShoes))
         {
@@ -52,21 +55,20 @@ public class Players2 : MonoBehaviour
             cloneSepatu.transform.localScale = transform.localScale ;
 
             //animasi melempar (attack)
-            anim.SetTrigger("isAttack");
-            
+            anim.SetTrigger("isAttack");  
         }
 
         AnimationState();       //pengatur animasi gerakan
 
-       // if (!isDead)    //jika tidak mati maka bisa gerak
-
+        //pindah di atas testnya
+        // if (!isDead)    //jika tidak mati maka bisa gerak
         //velX = speed;  
     }
 
     void FixedUpdate()
     {
         if (!isHurt)    //jika tidak sakit
-
+        //jalan
         if (Input.GetKey(leftbutton))
         {
             rb.velocity = new Vector2(-speed, rb.velocity.y);
@@ -74,7 +76,7 @@ public class Players2 : MonoBehaviour
         else if (Input.GetKey(rightbutton))
         {
             rb.velocity = new Vector2(speed, rb.velocity.y);
-        }//jalan
+        }//stop
         else
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
@@ -139,17 +141,19 @@ public class Players2 : MonoBehaviour
 
     void OnTriggerEnter2D (Collider2D col)
     {
-        if (col.gameObject.name.Equals("baja"))
+        if (col.gameObject.name.Equals("baja") || col.gameObject.name.Equals("sepatu"))
         {
             health -= 1;
+            print(health);
         }
 
-        if (col.gameObject.name.Equals("baja") && health > 0)
+        if ((col.gameObject.name.Equals("baja") || col.gameObject.name.Equals("sepatu")) && health > 0)
         {
             anim.SetTrigger("isHurt");
             StartCoroutine("Hurt");
-        }else
+        }else 
         {
+            jumpValue = 0;
             speed = 0;
             isDead = true;
             anim.SetTrigger("isDead");
@@ -166,7 +170,7 @@ public class Players2 : MonoBehaviour
         else
             rb.AddForce(new Vector2(100f, 100f));
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
 
         isHurt = false;
     }

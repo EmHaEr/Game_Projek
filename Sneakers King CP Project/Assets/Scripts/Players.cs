@@ -126,17 +126,18 @@ public class Players : MonoBehaviour
 
     void OnTriggerEnter2D (Collider2D col)
     {
-        if (col.gameObject.name.Equals("baja"))
+        if (col.gameObject.name.Equals("baja") || col.gameObject.name.Equals("sepatu"))
         {
             health -= 1;
         }
 
-        if (col.gameObject.name.Equals("baja") && health > 0)
+        if ((col.gameObject.name.Equals("baja") || col.gameObject.name.Equals("sepatu")) && health > 0)
         {
             anim.SetTrigger("isHurt");
             StartCoroutine("Hurt");
         }else
         {
+            jumpValue = 0;
             velX = 0;
             isDead = true;
             anim.SetTrigger("isDead");
