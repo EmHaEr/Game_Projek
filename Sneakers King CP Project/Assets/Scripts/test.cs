@@ -32,6 +32,7 @@ public class test : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        Darah.hitungDarah = health;
     }
 
     // Update is called once per frame
@@ -145,9 +146,8 @@ public class test : MonoBehaviour
         if (col.gameObject.name.Equals("baja") || (col.tag == "sepatu"))
         {
             health -= 1;
-            FindObjectOfType<GameManager>().HurtP1();
-            GameManager.p1life = health;
-            
+            Darah.hitungDarah = health;
+
         }
 
         if ((col.gameObject.name.Equals("baja") || (col.tag == "sepatu")) && health > 0)
