@@ -22,6 +22,8 @@ public class Sepatu : MonoBehaviour
 
     void OnTriggerEnter2D (Collider2D col)
     {
+        
+
         Instantiate(sepatuEffect, transform.position, transform.rotation);
 
         Destroy(gameObject);

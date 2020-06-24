@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 748841050911456905}
   - component: {fileID: 7702365672088729450}
   m_Layer: 0
-  m_Name: sepatu-11.png
-  m_TagString: Untagged
+  m_Name: sepatu
+  m_TagString: sepatu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

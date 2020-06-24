@@ -11,6 +11,7 @@ public class Players2 : MonoBehaviour
     bool facingRight = true;    //menghadap kanan
     float velX, speed = 3f;    //kecepatan jalan
     int health = 5;             //pengaturan jumlah darah
+
     bool isHurt, isDead;        //untuk triger
 
     public float jumpValue;     //kekuatan lompat
@@ -141,17 +142,20 @@ public class Players2 : MonoBehaviour
 
     void OnTriggerEnter2D (Collider2D col)
     {
-        if (col.gameObject.name.Equals("baja") || col.gameObject.name.Equals("sepatu"))
+        if (col.gameObject.name.Equals("baja") || (col.tag == "sepatu"))
         {
             health -= 1;
-            print(health);
+            FindObjectOfType<GameManager>().HurtP2();
+            GameManager.p2life = health;
+            
         }
 
-        if ((col.gameObject.name.Equals("baja") || col.gameObject.name.Equals("sepatu")) && health > 0)
+        if ((col.gameObject.name.Equals("baja") || (col.tag == "sepatu")) && health > 0)
         {
             anim.SetTrigger("isHurt");
             StartCoroutine("Hurt");
-        }else 
+        }
+        if(health < 1)
         {
             jumpValue = 0;
             speed = 0;
