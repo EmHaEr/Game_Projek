@@ -161,6 +161,7 @@ public class Players2 : MonoBehaviour
             speed = 0;
             isDead = true;
             anim.SetTrigger("isDead");
+            FindObjectOfType<GameManager>().Win1();
         }
     }
 

@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject panelPause;
+    public GameObject p1win;
+    public GameObject p2win;
 
     public void PauseControl()
     {
@@ -34,5 +36,15 @@ public class GameManager : MonoBehaviour
         Application.LoadLevel(0);
         Time.timeScale = 1;
         panelPause.SetActive(false);
+    }
+
+    public void Win1()
+    {
+        p1win.SetActive(true);
+    }
+
+    public void Win2()
+    {
+        p2win.SetActive(true);
     }
 }

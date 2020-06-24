@@ -147,7 +147,6 @@ public class test : MonoBehaviour
         {
             health -= 1;
             Darah.hitungDarah = health;
-
         }
 
         if ((col.gameObject.name.Equals("baja") || (col.tag == "sepatu")) && health > 0)
@@ -161,6 +160,7 @@ public class test : MonoBehaviour
             speed = 0;
             isDead = true;
             anim.SetTrigger("isDead");
+            FindObjectOfType<GameManager>().Win2();
         }
     }
 
