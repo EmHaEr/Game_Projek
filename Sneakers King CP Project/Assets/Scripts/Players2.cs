@@ -30,9 +30,9 @@ public class Players2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DarahP2.hitungDarah = health;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        DarahP2.hitungDarah = health;
     }
 
     // Update is called once per frame

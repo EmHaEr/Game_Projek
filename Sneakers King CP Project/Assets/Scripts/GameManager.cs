@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
-    //public GameObject gameOver;
-
     public GameObject panelPause;
 
     public void PauseControl()

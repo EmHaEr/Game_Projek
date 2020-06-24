@@ -30,9 +30,9 @@ public class test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Darah.hitungDarah = health;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        Darah.hitungDarah = health;
     }
 
     // Update is called once per frame

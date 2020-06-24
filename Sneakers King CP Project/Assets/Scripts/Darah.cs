@@ -11,7 +11,7 @@ public class Darah : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hitungDarah = 0;
+        hitungDarah = 5;
         hitungDarahText = GetComponent<Text>();
     }
 
